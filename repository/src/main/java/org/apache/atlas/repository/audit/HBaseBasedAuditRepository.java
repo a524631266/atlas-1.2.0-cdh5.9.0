@@ -231,9 +231,9 @@ public class HBaseBasedAuditRepository extends AbstractStorageBasedAuditReposito
              * small is set to true to optimise RPC calls as the scanner is created per request
              */
             Scan scan = new Scan().setReversed(true).setFilter(new PageFilter(n))
-                                  .setStopRow(Bytes.toBytes(entityId))
-                                  .setCaching(n)
-                                  .setSmall(true);
+                                  .setStopRow(Bytes.toBytes(entityId));
+            scan.setSmall(true);
+            scan.setCaching(n);
 
             if (StringUtils.isEmpty(startKey)) {
                 //Set start row to entity id + max long value
@@ -411,9 +411,10 @@ public class HBaseBasedAuditRepository extends AbstractStorageBasedAuditReposito
              * small is set to true to optimise RPC calls as the scanner is created per request
              */
             Scan scan = new Scan().setReversed(true).setFilter(new PageFilter(n))
-                                  .setStopRow(Bytes.toBytes(entityId))
-                                  .setCaching(n)
-                                  .setSmall(true);
+                                  .setStopRow(Bytes.toBytes(entityId));
+            scan.setCaching(n);
+            scan.setSmall(true);
+
             if (StringUtils.isEmpty(startKey)) {
                 //Set start row to entity id + max long value
                 byte[] entityBytes = getKey(entityId, Long.MAX_VALUE, Integer.MAX_VALUE);
