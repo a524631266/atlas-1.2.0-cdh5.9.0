@@ -464,7 +464,8 @@ public class HBaseAtlasHook extends AtlasHook {
             columnFamily.setAttribute(ATTR_CF_DATA_BLOCK_ENCODING, (hColumnDescriptor.getDataBlockEncoding() != null ? hColumnDescriptor.getDataBlockEncoding().name():null));
             columnFamily.setAttribute(ATTR_CF_ENCRYPTION_TYPE, hColumnDescriptor.getEncryptionType());
             columnFamily.setAttribute(ATTR_CF_EVICT_BLOCK_ONCLOSE, hColumnDescriptor.isEvictBlocksOnClose());
-            columnFamily.setAttribute(ATTR_CF_KEEP_DELETE_CELLS, ( hColumnDescriptor.getKeepDeletedCells() != null ? hColumnDescriptor.getKeepDeletedCells().name():null));
+            columnFamily.setAttribute(ATTR_CF_KEEP_DELETE_CELLS, hColumnDescriptor.getKeepDeletedCellsAsEnum()!=null?hColumnDescriptor.getKeepDeletedCellsAsEnum().name(): null);
+//            columnFamily.setAttribute(ATTR_CF_KEEP_DELETE_CELLS, ( hColumnDescriptor.getKeepDeletedCells() != null ? hColumnDescriptor.getKeepDeletedCells().name():null));
             columnFamily.setAttribute(ATTR_CF_MAX_VERSIONS, hColumnDescriptor.getMaxVersions());
             columnFamily.setAttribute(ATTR_CF_MIN_VERSIONS, hColumnDescriptor.getMinVersions());
             columnFamily.setAttribute(ATTR_CF_PREFETCH_BLOCK_ONOPEN, hColumnDescriptor.isPrefetchBlocksOnOpen());

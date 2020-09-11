@@ -571,7 +571,8 @@ public class HBaseBridge {
         ret.setAttribute(ATTR_CF_DATA_BLOCK_ENCODING, (hcdt.getDataBlockEncoding() != null ? hcdt.getDataBlockEncoding().name():null));
         ret.setAttribute(ATTR_CF_ENCRYPTION_TYPE, hcdt.getEncryptionType());
         ret.setAttribute(ATTR_CF_EVICT_BLOCK_ONCLOSE, hcdt.isEvictBlocksOnClose());
-        ret.setAttribute(ATTR_CF_KEEP_DELETE_CELLS, ( hcdt.getKeepDeletedCells() != null ? hcdt.getKeepDeletedCells().name():null));
+        ret.setAttribute(ATTR_CF_KEEP_DELETE_CELLS, ( hcdt.getKeepDeletedCellsAsEnum() != null ? hcdt.getKeepDeletedCellsAsEnum().name():null));
+//        ret.setAttribute(ATTR_CF_KEEP_DELETE_CELLS, ( hcdt.getKeepDeletedCells() != null ? hcdt.getKeepDeletedCells().name():null));
         ret.setAttribute(ATTR_CF_MAX_VERSIONS, hcdt.getMaxVersions());
         ret.setAttribute(ATTR_CF_MIN_VERSIONS, hcdt.getMinVersions());
         ret.setAttribute(ATTR_CF_PREFETCH_BLOCK_ONOPEN, hcdt.isPrefetchBlocksOnOpen());

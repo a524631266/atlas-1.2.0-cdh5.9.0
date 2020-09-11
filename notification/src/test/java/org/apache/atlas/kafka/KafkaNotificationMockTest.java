@@ -178,4 +178,50 @@ public class KafkaNotificationMockTest {
 
 
     }
+
+
+    @Test
+    public void justForSendSuccess() throws ExecutionException, InterruptedException, NotificationException {
+
+
+        Properties configProperties = mock(Properties.class);
+        configProperties.setProperty("atlas.notification.embedded", "false");
+        configProperties.setProperty("atlas.kafka.zookeeper.connect", "localhost:2181");
+        configProperties.setProperty("atlas.kafka.bootstrap.servers", "localhost:9027,localhost:9028,localhost:9029");
+        configProperties.setProperty("atlas.kafka.hook.group.id", "atlas");
+
+//        atlas.kafka.bootstrap.servers=localhost:9027,localhost:9028,localhost:9029
+//#atlas.kafka.zookeeper.session.timeout.ms=400
+//        atlas.kafka.zookeeper.session.timeout.ms=60000
+//#atlas.kafka.zookeeper.connection.timeout.ms=200
+//        atlas.kafka.zookeeper.connection.timeout.ms=30000
+//        atlas.kafka.zookeeper.sync.time.ms=20
+//        atlas.kafka.auto.commit.interval.ms=1000
+//        atlas.kafka.hook.group.id=atlas
+//
+//        atlas.kafka.enable.auto.commit=false
+//        atlas.kafka.auto.offset.reset=earliest
+//        atlas.kafka.session.timeout.ms=30000
+//        atlas.kafka.offsets.topic.replication.factor=1
+//        atlas.kafka.poll.timeout.ms=1000
+//
+//        atlas.notification.create.topics=true
+//        atlas.notification.replicas=1
+//        atlas.notification.topics=ATLAS_HOOK,ATLAS_ENTITIES
+//        atlas.notification.log.failed.messages=true
+//        atlas.notification.consumer.retry.interval=500
+//        atlas.notification.hook.retry.interval=1000
+        configProperties.setProperty("atlas.notification.replicas", "3");
+        configProperties.setProperty("atlas.notification.topics", "ATLAS_HOOK,ATLAS_ENTITIES");
+
+        KafkaNotification kafkaNotification = new KafkaNotification(configProperties);
+        String message1 = "This is a test message3";
+
+        String topicName = kafkaNotification.getTopicName(NotificationInterface.NotificationType.HOOK);
+//        ProducerRecord producerRecord = new ProducerRecord(topicName, message1);
+//        Producer producer = mock(Producer.class);
+//        Object o = producer.send(producerRecord).get();
+        kafkaNotification.sendInternal(NotificationInterface.NotificationType.HOOK, Arrays.asList(message1));
+        System.out.println(0);
+    }
 }
